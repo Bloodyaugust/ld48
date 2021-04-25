@@ -5,7 +5,7 @@ export var starting_ale: float
 onready var _ale: float = starting_ale
 
 func drink(amount: float) -> float:
-  var _drank: float = clamp(_ale - amount, 0, amount)
+  var _drank: float = clamp(amount, 0, _ale)
   _ale -= _drank
 
   if _ale == 0:

@@ -22,13 +22,16 @@ contacts_reported = 1
 contact_monitor = true
 can_sleep = false
 script = ExtResource( 6 )
+drink_rate = 4.0
+drink_range = 10.0
+drink_threshold = 6.0
 mine_amount = 1.0
 mine_stamina_cost = 2.0
 mine_time = 1.0
 starting_health = 10.0
 stamina_regen_rate = 1.0
 stamina_max = 5.0
-thirst_rate = 2.0
+thirst_rate = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.314941, 3.05176e-05 )
