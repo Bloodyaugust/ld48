@@ -5,7 +5,7 @@ onready var _player_shop_controller: Node = get_tree().get_root().find_node("Pla
 
 var _placeable_scenes: Dictionary = {}
 
-func _input(event):
+func _unhandled_input(event):
   if event is InputEventMouseButton && event.button_index == 1 && !event.pressed:
     if _player_shop_controller.buy():
       # Buy the selected thing and place it

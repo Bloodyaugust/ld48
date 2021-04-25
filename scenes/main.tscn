@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://views/fps.gd" type="Script" id=1]
 [ext_resource path="res://actors/Dwarf.tscn" type="PackedScene" id=2]
@@ -10,7 +10,18 @@
 [ext_resource path="res://scripts/controllers/PlayerPlacementController.gd" type="Script" id=8]
 [ext_resource path="res://scripts/controllers/PlayerShopController.gd" type="Script" id=9]
 [ext_resource path="res://views/resources.gd" type="Script" id=10]
+[ext_resource path="res://views/placeables.gd" type="Script" id=11]
+[ext_resource path="res://sprites/dwarf/dwarf_head.png" type="Texture" id=12]
+[ext_resource path="res://sprites/barrel.png" type="Texture" id=13]
 [ext_resource path="res://doodads/Blocker.tscn" type="PackedScene" id=16]
+
+[sub_resource type="StyleBoxFlat" id=1]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 1, 0.752941, 0.101961, 1 )
 
 [node name="Node2D" type="Node2D"]
 
@@ -107,6 +118,109 @@ margin_right = 130.0
 margin_bottom = 37.0
 size_flags_horizontal = 8
 text = "Gold: 1252139"
+
+[node name="Placeables" type="MarginContainer" parent="UIRoot"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -70.0
+margin_top = -40.0
+margin_right = 70.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource( 3 )
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlaceablesContainer" type="HBoxContainer" parent="UIRoot/Placeables"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 148.0
+margin_bottom = 74.0
+custom_constants/separation = 10
+alignment = 1
+
+[node name="cask" type="TextureRect" parent="UIRoot/Placeables/PlaceablesContainer"]
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+texture = ExtResource( 13 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="UIRoot/Placeables/PlaceablesContainer/cask"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -24.0
+custom_colors/font_color = Color( 1, 0.752941, 0.101961, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "10"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="selected" type="Panel" parent="UIRoot/Placeables/PlaceablesContainer/cask"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="dwarf" type="TextureRect" parent="UIRoot/Placeables/PlaceablesContainer"]
+margin_left = 74.0
+margin_right = 138.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+texture = ExtResource( 12 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="UIRoot/Placeables/PlaceablesContainer/dwarf"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -24.0
+custom_colors/font_color = Color( 1, 0.752941, 0.101961, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "20"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="selected" type="Panel" parent="UIRoot/Placeables/PlaceablesContainer/dwarf"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="BetterCam" parent="." instance=ExtResource( 5 )]
 position = Vector2( 0, 125.858 )
