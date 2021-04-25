@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://views/fps.gd" type="Script" id=1]
 [ext_resource path="res://actors/Dwarf.tscn" type="PackedScene" id=2]
@@ -6,7 +6,11 @@
 [ext_resource path="res://views/main_menu.gd" type="Script" id=4]
 [ext_resource path="res://lib/BetterCam.tscn" type="PackedScene" id=5]
 [ext_resource path="res://actors/Layer.tscn" type="PackedScene" id=6]
+[ext_resource path="res://sprites/barrel.png" type="Texture" id=7]
 [ext_resource path="res://doodads/Blocker.tscn" type="PackedScene" id=16]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 22.0845, 31.1394 )
 
 [node name="Node2D" type="Node2D"]
 
@@ -87,22 +91,22 @@ position = Vector2( 0, 125.858 )
 zoom = Vector2( 1.1, 1.1 )
 
 [node name="Dwarf" parent="." instance=ExtResource( 2 )]
-position = Vector2( 22.9966, -91.736 )
+position = Vector2( 61.1603, -543.942 )
 
 [node name="Dwarf2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 22.9966, -91.736 )
+position = Vector2( -32.473, -475.859 )
 
 [node name="Dwarf3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 22.9966, -91.736 )
+position = Vector2( -181.454, -263.449 )
 
 [node name="Dwarf4" parent="." instance=ExtResource( 2 )]
-position = Vector2( 22.9966, -91.736 )
+position = Vector2( 199.896, -331.41 )
 
 [node name="Dwarf5" parent="." instance=ExtResource( 2 )]
-position = Vector2( 22.9966, -91.736 )
+position = Vector2( 73.8938, -389.613 )
 
 [node name="Dwarf6" parent="." instance=ExtResource( 2 )]
-position = Vector2( 22.9966, -91.736 )
+position = Vector2( -127.003, -435.736 )
 mine_amount = 5.0
 
 [node name="Layer" parent="." instance=ExtResource( 6 )]
@@ -121,3 +125,18 @@ position = Vector2( -640, 128 )
 
 [node name="Blocker2" parent="." instance=ExtResource( 16 )]
 position = Vector2( 640, 128 )
+
+[node name="StaticBody2D" type="RigidBody2D" parent="."]
+position = Vector2( -112.253, 8.01813 )
+z_index = -1
+z_as_relative = false
+collision_layer = 4
+collision_mask = 6
+mass = 20.0
+can_sleep = false
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D"]
+texture = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource( 1 )
