@@ -6,33 +6,34 @@
 [node name="Layer" type="Node2D"]
 
 [node name="Terrain" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, 64 )
 
 [node name="Terrain2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 128, 256 )
+position = Vector2( 128, 64 )
 
 [node name="Terrain3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 256, 256 )
+position = Vector2( 256, 64 )
 
 [node name="Terrain4" parent="." instance=ExtResource( 2 )]
-position = Vector2( 384, 256 )
+position = Vector2( 384, 64 )
 
 [node name="Terrain5" parent="." instance=ExtResource( 2 )]
-position = Vector2( 512, 256 )
+position = Vector2( 512, 64 )
 
 [node name="Terrain6" parent="." instance=ExtResource( 2 )]
-position = Vector2( -512, 256 )
+position = Vector2( -512, 64 )
 
 [node name="Terrain7" parent="." instance=ExtResource( 2 )]
-position = Vector2( -384, 256 )
+position = Vector2( -384, 64 )
 
 [node name="Terrain8" parent="." instance=ExtResource( 2 )]
-position = Vector2( -256, 256 )
+position = Vector2( -256, 64 )
 
 [node name="Terrain9" parent="." instance=ExtResource( 2 )]
-position = Vector2( -128, 256 )
+position = Vector2( -128, 64 )
 
 [node name="Blocker" parent="." instance=ExtResource( 1 )]
-position = Vector2( -640, 256 )
+position = Vector2( -640, 64 )
 
 [node name="Blocker2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 640, 256 )
+position = Vector2( 640, 64 )
