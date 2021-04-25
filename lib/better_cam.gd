@@ -29,10 +29,10 @@ func _exit_tree():
 
 func _handle_keys() -> void:
   if key_movement:
-    if Input.is_action_pressed("ui_left"):
-      _target.translate(Vector2.LEFT * camera_target_speed * get_process_delta_time())
-    if Input.is_action_pressed("ui_right"):
-      _target.translate(Vector2.RIGHT * camera_target_speed * get_process_delta_time())
+    # if Input.is_action_pressed("ui_left"):
+    #   _target.translate(Vector2.LEFT * camera_target_speed * get_process_delta_time())
+    # if Input.is_action_pressed("ui_right"):
+    #   _target.translate(Vector2.RIGHT * camera_target_speed * get_process_delta_time())
     if Input.is_action_pressed("ui_up"):
       _target.translate(Vector2.UP * camera_target_speed * get_process_delta_time())
     if Input.is_action_pressed("ui_down"):

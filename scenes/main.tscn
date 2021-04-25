@@ -225,6 +225,10 @@ __meta__ = {
 [node name="BetterCam" parent="." instance=ExtResource( 5 )]
 position = Vector2( 0, 125.858 )
 zoom = Vector2( 1.2, 1.2 )
+camera_target_speed = 1000.0
+mouse_drag = false
+zoom_follow_scalar = 0.0
+zoom_max = 2.0
 
 [node name="Dwarf" parent="." instance=ExtResource( 2 )]
 position = Vector2( 61.1603, -543.942 )
