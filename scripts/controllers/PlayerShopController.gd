@@ -16,6 +16,16 @@ func buy() -> bool:
 
   return false
 
+func _on_state_changed(state_key: String, substate):
+  match state_key:
+    "money":
+      if Store.state.selected_placeable != "" && _placeables_dictionary[Store.state.selected_placeable].cost > substate:
+        Store.set_state("selected_placeable", "")
+    _:
+      pass
+
 func _ready():
   for _placeable in _placeables:
     _placeables_dictionary[_placeable.type] = _placeable
+
+  Store.connect("state_changed", self, "_on_state_changed")

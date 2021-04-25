@@ -7,9 +7,11 @@ var _placeable_scenes: Dictionary = {}
 
 func _unhandled_input(event):
   if event is InputEventMouseButton && event.button_index == 1 && !event.pressed:
+    var _buying_placeable: String = Store.state.selected_placeable
+
     if _player_shop_controller.buy():
       # Buy the selected thing and place it
-      var _new_actor = _placeable_scenes[Store.state["selected_placeable"]].instance()
+      var _new_actor = _placeable_scenes[_buying_placeable].instance()
 
       _new_actor.global_position = get_global_mouse_position()
       get_tree().get_root().add_child(_new_actor)

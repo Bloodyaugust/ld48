@@ -7,8 +7,11 @@ onready var _placeables_textures: Array = _placeables_container.get_children()
 var _placeables_dictionary: Dictionary = {}
 
 func _handle_placeable_input(event: InputEvent, placeable: String):
-  if event is InputEventMouseButton && event.button_index == 1 && !event.pressed && _placeables_dictionary[placeable].cost <= Store.state.money:
-    Store.set_state("selected_placeable", placeable)
+  if event is InputEventMouseButton && event.button_index == 1 && !event.pressed:
+    if Store.state.selected_placeable == placeable:
+      Store.set_state("selected_placeable", "")
+    elif _placeables_dictionary[placeable].cost <= Store.state.money:
+      Store.set_state("selected_placeable", placeable)
 
 func _update_placeable_textures():
   for _placeable_texture in _placeables_textures:
@@ -19,10 +22,8 @@ func _update_placeable_textures():
 
     if Store.state.selected_placeable == _placeable_texture.name:
       _placeable_texture.find_node("selected").visible = true
-      print("Showing selected for: ", _placeable_texture.name)
     else:
       _placeable_texture.find_node("selected").visible = false
-      print("Hiding selected for: ", _placeable_texture.name)
 
 func _on_state_changed(state_key: String, substate):
   match state_key:
