@@ -1,5 +1,7 @@
 extends Sprite
 
+signal mined
+
 var _data: Dictionary
 var _health: float
 var _value: float
@@ -15,6 +17,8 @@ func mine(damage: float) -> void:
   if _health > 0 && _health - damage <= 0:
     if _value > 0:
       Store.set_state("money", Store.state.money + _value)
+    
+    emit_signal("mined", global_position.y)
     queue_free()
 
   _health -= damage
