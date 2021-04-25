@@ -18,7 +18,3 @@ func mine(damage: float) -> void:
     queue_free()
 
   _health -= damage
-
-func _ready() -> void:
-  # TODO: Remove this once the map is being generated
-  initialize("dirt")
