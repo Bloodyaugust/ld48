@@ -4,8 +4,11 @@ enum DWARF_STATE {
   IDLE,
   DRINKING,
   MINING,
+  WANDERING,
 }
 
+export var drink_rate: float
+export var drink_threshold: float
 export var mine_amount: float
 export var mine_stamina_cost: float
 export var mine_time: float
@@ -35,7 +38,6 @@ var _wander_direction: Vector2
 func _idle():
   modulate = Color.green
   _target = null
-  _wander()
   _state = DWARF_STATE.IDLE
 
 func _set_facing(is_right):
@@ -65,24 +67,29 @@ func _start_mining():
   _state = DWARF_STATE.MINING
 
 func _integrate_forces(state):
-  if _state == DWARF_STATE.IDLE:
+  if _state == DWARF_STATE.WANDERING && _mine_cast_down.is_colliding():
     linear_velocity.x = _wander_direction.x * 100
+
+func _physics_process(delta):
+  if !_mine_cast_down.is_colliding():
+    if _mine_cast_left.is_colliding():
+      apply_central_impulse(Vector2.RIGHT * 100)
+    elif _mine_cast_right.is_colliding():
+      apply_central_impulse(Vector2.LEFT * 100)
+    elif get_colliding_bodies().size() >= 1:
+      apply_central_impulse((Vector2.UP + Vector2(rand_range(-0.45, 0.45), 0)).normalized() * 1000)
 
 func _process(delta):
   _thirst += delta * thirst_rate
 
-  if _state == DWARF_STATE.IDLE:
+  if _state == DWARF_STATE.IDLE || _state == DWARF_STATE.WANDERING:
     _stamina = clamp(_stamina + (stamina_regen_rate * delta), 0, stamina_max)
+
+  if _state == DWARF_STATE.WANDERING:
     _wander_time = clamp(_wander_time - delta, 0, 5)
 
     if _wander_time == 0:
-      _wander()
-
-    if !_mine_cast_down.is_colliding():
-      if _wander_direction == Vector2.LEFT && _mine_cast_left.is_colliding():
-        _wander()
-      if _wander_direction == Vector2.RIGHT && _mine_cast_right.is_colliding():
-        _wander()
+      _idle()
 
   if _state == DWARF_STATE.MINING:
     _mining_time_left = clamp(_mining_time_left - delta, 0, mine_time)
@@ -95,12 +102,15 @@ func _process(delta):
       apply_central_impulse((Vector2.UP + Vector2(rand_range(-0.15, 0.15), 0)).normalized() * rand_range(600, 2100))
       _idle()
 
-  if _state == DWARF_STATE.IDLE && _stamina >= mine_stamina_cost:
-    var _target_block_collider = _mine_cast_down.get_collider();
+  if _state == DWARF_STATE.IDLE:
+    if _stamina >= mine_stamina_cost:
+      var _target_block_collider = _mine_cast_down.get_collider()
 
-    if _target_block_collider:
-      _target = _target_block_collider.get_parent()
-      _start_mining()
+      if _target_block_collider:
+        _target = _target_block_collider.get_parent()
+        _start_mining()
+    else:
+      _wander()
 
   if _health <= 0:
     queue_free()
@@ -109,17 +119,9 @@ func _ready():
   _stamina = rand_range(0, stamina_max)
   _idle()
 
-func _wander(direction = null):
+func _wander():
   var _wander_direction_randomizer = randi() % 3
   _wander_time = rand_range(0, 2.5)
-
-  match direction:
-    Vector2.LEFT:
-      _wander_direction_randomizer = 0
-    Vector2.RIGHT:
-      _wander_direction_randomizer = 1
-    _:
-      _wander_direction_randomizer = _wander_direction_randomizer
 
   match _wander_direction_randomizer:
     0:
@@ -130,3 +132,6 @@ func _wander(direction = null):
       _set_facing(true)
     _:
       _wander_direction = Vector2.ZERO
+
+  modulate = Color.blue
+  _state = DWARF_STATE.WANDERING

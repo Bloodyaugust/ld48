@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://views/fps.gd" type="Script" id=1]
 [ext_resource path="res://actors/Dwarf.tscn" type="PackedScene" id=2]
@@ -6,11 +6,8 @@
 [ext_resource path="res://views/main_menu.gd" type="Script" id=4]
 [ext_resource path="res://lib/BetterCam.tscn" type="PackedScene" id=5]
 [ext_resource path="res://actors/Layer.tscn" type="PackedScene" id=6]
-[ext_resource path="res://sprites/barrel.png" type="Texture" id=7]
+[ext_resource path="res://actors/Ale.tscn" type="PackedScene" id=7]
 [ext_resource path="res://doodads/Blocker.tscn" type="PackedScene" id=16]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 22.0845, 31.1394 )
 
 [node name="Node2D" type="Node2D"]
 
@@ -126,17 +123,4 @@ position = Vector2( -640, 128 )
 [node name="Blocker2" parent="." instance=ExtResource( 16 )]
 position = Vector2( 640, 128 )
 
-[node name="StaticBody2D" type="RigidBody2D" parent="."]
-position = Vector2( -112.253, 8.01813 )
-z_index = -1
-z_as_relative = false
-collision_layer = 4
-collision_mask = 6
-mass = 20.0
-can_sleep = false
-
-[node name="Sprite" type="Sprite" parent="StaticBody2D"]
-texture = ExtResource( 7 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource( 1 )
+[node name="Ale" parent="." instance=ExtResource( 7 )]
