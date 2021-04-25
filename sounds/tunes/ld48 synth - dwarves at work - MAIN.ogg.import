@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/ld48 synth - dwarves at work - MAIN.ogg-76041047b23acb53a53c9faaba6db931.oggstr"
+
+[deps]
+
+source_file="res://sounds/tunes/ld48 synth - dwarves at work - MAIN.ogg"
+dest_files=[ "res://.import/ld48 synth - dwarves at work - MAIN.ogg-76041047b23acb53a53c9faaba6db931.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
