@@ -2,12 +2,12 @@
 
 importer="ogg_vorbis"
 type="AudioStreamOGGVorbis"
-path="res://.import/ld48 synth - upscale bar theme - MAIN.ogg-de0c8971c3b4b400bd861752f68b339b.oggstr"
+path="res://.import/ld48 synth - upscale bar theme - MAIN.ogg-fef4f93b65000c9939f23c82deb29184.oggstr"
 
 [deps]
 
-source_file="res://sounds/tunes/ld48 synth - upscale bar theme - MAIN.ogg"
-dest_files=[ "res://.import/ld48 synth - upscale bar theme - MAIN.ogg-de0c8971c3b4b400bd861752f68b339b.oggstr" ]
+source_file="res://resources/sounds/tunes/ld48 synth - upscale bar theme - MAIN.ogg"
+dest_files=[ "res://.import/ld48 synth - upscale bar theme - MAIN.ogg-fef4f93b65000c9939f23c82deb29184.oggstr" ]
 
 [params]
 

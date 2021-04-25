@@ -82,7 +82,7 @@ func _integrate_forces(state):
     _mine_cast_down.is_colliding() &&
     is_instance_valid(_drinking_target) &&
     !_drinking_target.is_queued_for_deletion() &&
-    global_position.distance_to(_drinking_target.global_position) > drink_range):
+    abs(global_position.x - _drinking_target.global_position.x) > drink_range):
     linear_velocity.x = (1 if _drinking_target.global_position.x > global_position.x else -1) * 200
 
 func _physics_process(delta):

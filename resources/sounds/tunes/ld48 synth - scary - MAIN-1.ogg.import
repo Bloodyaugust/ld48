@@ -2,12 +2,12 @@
 
 importer="ogg_vorbis"
 type="AudioStreamOGGVorbis"
-path="res://.import/ld48 synth - scary - MAIN-1.ogg-7045c5e72e73b7b78b04be58bb34d2b8.oggstr"
+path="res://.import/ld48 synth - scary - MAIN-1.ogg-e3a6466ff3e1310c92318e7e2d62c9a9.oggstr"
 
 [deps]
 
-source_file="res://sounds/tunes/ld48 synth - scary - MAIN-1.ogg"
-dest_files=[ "res://.import/ld48 synth - scary - MAIN-1.ogg-7045c5e72e73b7b78b04be58bb34d2b8.oggstr" ]
+source_file="res://resources/sounds/tunes/ld48 synth - scary - MAIN-1.ogg"
+dest_files=[ "res://.import/ld48 synth - scary - MAIN-1.ogg-e3a6466ff3e1310c92318e7e2d62c9a9.oggstr" ]
 
 [params]
 
