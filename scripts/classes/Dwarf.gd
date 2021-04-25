@@ -112,6 +112,13 @@ func _process(delta):
         _drinking_target = _ales[0]
     elif global_position.distance_to(_drinking_target.global_position) <= drink_range:
       _thirst = clamp(_thirst - _drinking_target.drink(drink_rate * delta), 0, 100)
+    else:
+      if _mine_cast_left.is_colliding():
+        _mining_target = _mine_cast_left.get_collider().get_parent()
+        _start_mining()
+      elif _mine_cast_right.is_colliding():
+        _mining_target = _mine_cast_right.get_collider().get_parent()
+        _start_mining()
 
     if _thirst == 0:
       _idle()
