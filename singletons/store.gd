@@ -4,7 +4,8 @@ signal state_changed(state_key, substate)
 
 var state: Dictionary = {
   "client_view": "",
-  "game": ""
+  "game": "",
+  "money": 0
  }
 
 func set_state(state_key: String, new_state) -> void:
@@ -15,6 +16,7 @@ func set_state(state_key: String, new_state) -> void:
 func _initialize():
   set_state("client_view", ClientConstants.CLIENT_VIEW_MAIN_MENU)
   set_state("game", GameConstants.GAME_OVER)
+  set_state("money", 10)
 
 func _ready():
   call_deferred("_initialize")
