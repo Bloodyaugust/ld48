@@ -36,6 +36,33 @@
 			],
 			"separators": [],
 			"props": {}
+		},
+		{
+			"name": "placeables",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "type",
+					"display": null
+				},
+				{
+					"typeStr": "4",
+					"name": "cost",
+					"display": null
+				}
+			],
+			"lines": [
+				{
+					"type": "cask",
+					"cost": 10
+				},
+				{
+					"type": "dwarf",
+					"cost": 20
+				}
+			],
+			"separators": [],
+			"props": {}
 		}
 	],
 	"customTypes": [],

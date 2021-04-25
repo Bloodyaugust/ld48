@@ -105,20 +105,21 @@ func _process(delta):
     _start_drinking()
 
   if _state == DWARF_STATE.DRINKING:
-    if !is_instance_valid(_drinking_target) || _drinking_target.is_queued_for_deletion():
-      var _ales: Array = _tree.get_nodes_in_group("Ale")
+    var _ales = _get_ales_sorted_distance()
 
-      if _ales.size() > 0:
-        _drinking_target = _ales[0]
-    elif global_position.distance_to(_drinking_target.global_position) <= drink_range:
-      _thirst = clamp(_thirst - _drinking_target.drink(drink_rate * delta), 0, 100)
-    else:
-      if _mine_cast_left.is_colliding():
-        _mining_target = _mine_cast_left.get_collider().get_parent()
-        _start_mining()
-      elif _mine_cast_right.is_colliding():
-        _mining_target = _mine_cast_right.get_collider().get_parent()
-        _start_mining()
+    if _ales.size() > 0:
+      _drinking_target = _ales[0]
+
+    if is_instance_valid((_drinking_target)) && !_drinking_target.is_queued_for_deletion():
+      if global_position.distance_to(_drinking_target.global_position) <= drink_range:
+        _thirst = clamp(_thirst - _drinking_target.drink(drink_rate * delta), 0, 100)
+      else:
+        if _mine_cast_left.is_colliding():
+          _mining_target = _mine_cast_left.get_collider().get_parent()
+          _start_mining()
+        elif _mine_cast_right.is_colliding():
+          _mining_target = _mine_cast_right.get_collider().get_parent()
+          _start_mining()
 
     if _thirst == 0:
       _idle()
@@ -132,7 +133,7 @@ func _process(delta):
   if _state == DWARF_STATE.MINING:
     _mining_time_left = clamp(_mining_time_left - delta, 0, mine_time)
 
-    if !is_instance_valid(_mining_target) || _mining_target.is_queued_for_deletion():
+    if !is_instance_valid(_mining_target) || _mining_target.is_queued_for_deletion() || !_mining_target.has_method("mine"):
       _idle()
 
     if _mining_time_left == 0 && _mining_target:
@@ -174,3 +175,14 @@ func _wander():
 
   modulate = Color.blue
   _state = DWARF_STATE.WANDERING
+
+func _get_ales_sorted_distance() -> Array:
+  var _ales: Array = _tree.get_nodes_in_group("Ale")
+
+  if _ales.size() > 0:
+    _ales.sort_custom(self, "_sort_by_distance")
+
+  return _ales
+
+func _sort_by_distance(a: Node2D, b: Node2D) -> bool:
+  return a.global_position.distance_squared_to(global_position) < b.global_position.distance_squared_to(global_position)

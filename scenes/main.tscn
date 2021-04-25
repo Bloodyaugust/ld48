@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://views/fps.gd" type="Script" id=1]
 [ext_resource path="res://actors/Dwarf.tscn" type="PackedScene" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://lib/BetterCam.tscn" type="PackedScene" id=5]
 [ext_resource path="res://actors/Layer.tscn" type="PackedScene" id=6]
 [ext_resource path="res://actors/Ale.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scripts/controllers/PlayerPlacementController.gd" type="Script" id=8]
+[ext_resource path="res://scripts/controllers/PlayerShopController.gd" type="Script" id=9]
 [ext_resource path="res://doodads/Blocker.tscn" type="PackedScene" id=16]
 
 [node name="Node2D" type="Node2D"]
@@ -127,3 +129,9 @@ position = Vector2( 640, -64 )
 position = Vector2( -112.253, -65.9819 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[node name="PlayerPlacementController" type="Node2D" parent="."]
+script = ExtResource( 8 )
+
+[node name="PlayerShopController" type="Node" parent="."]
+script = ExtResource( 9 )
