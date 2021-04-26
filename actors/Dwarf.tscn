@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://sprites/dwarf/dwarf_arm.png" type="Texture" id=1]
 [ext_resource path="res://sprites/dwarf/dwarf_head.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://sprites/dwarf/dwarf_body.png" type="Texture" id=5]
 [ext_resource path="res://scripts/classes/Dwarf.gd" type="Script" id=6]
 [ext_resource path="res://sprites/mug.png" type="Texture" id=7]
+[ext_resource path="res://resources/sounds/sfx/ld48 synth - mine2 - MAIN.ogg" type="AudioStream" id=8]
 
 [sub_resource type="PhysicsMaterial" id=1]
 bounce = 0.2
@@ -120,6 +121,34 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 220.451, 220.451, 233.208, 214.264, 215.811, 232.768 ]
+}
+tracks/2/type = "audio"
+tracks/2/path = NodePath("sfx-mine")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": [ {
+"end_offset": 0.15,
+"start_offset": 0.25,
+"stream": ExtResource( 8 )
+} ],
+"times": PoolRealArray( 0.7 )
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "randomize_mine_sfx_pitch"
+} ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -236,3 +265,6 @@ anims/drink = SubResource( 6 )
 anims/idle = SubResource( 4 )
 anims/mine = SubResource( 3 )
 anims/valuables = SubResource( 5 )
+
+[node name="sfx-mine" type="AudioStreamPlayer2D" parent="."]
+attenuation = 0.143587

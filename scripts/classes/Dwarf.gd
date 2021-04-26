@@ -46,6 +46,9 @@ var _wander_direction: Vector2
 func damage(amount: float):
   _health -= amount
 
+func randomize_mine_sfx_pitch():
+  $"./sfx-mine".pitch_scale = rand_range(1, 1.5)
+
 func _idle():
   _drinking_target = null
   _mining_target = null
