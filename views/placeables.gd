@@ -31,8 +31,12 @@ func _on_state_changed(state_key: String, substate):
       _update_placeable_textures()
     "selected_placeable":
       _update_placeable_textures()
-    _:
-      pass
+    "game":
+      match substate:
+        GameConstants.GAME_OVER:
+          visible = false
+        GameConstants.GAME_IN_PROGRESS:
+          visible = true
 
 func _ready():
   for _placeable in _placeables:

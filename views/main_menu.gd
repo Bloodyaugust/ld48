@@ -3,7 +3,7 @@ extends Control
 onready var _play_button: Button = find_node("Play")
 
 func _on_play_button_pressed() -> void:
-  Store.set_state("client_view", ClientConstants.CLIENT_VIEW_NONE)
+  Store.start_game()
 
 func _on_state_changed(state_key: String, substate):
   match state_key:

@@ -38,6 +38,13 @@ func _handle_keys() -> void:
     if Input.is_action_pressed("ui_down"):
       _target.translate(Vector2.DOWN * camera_target_speed * get_process_delta_time())
 
+func _on_store_state_changed(state_key: String, substate):
+  match state_key:
+    "game":
+      match substate:
+        GameConstants.GAME_STARTING:
+          set_target_position(Vector2(0, 125))
+
 func _on_target_draw():
   _target.draw_arc(_target.global_position, 100, 0, PI * 2, 32, Color.green)
 
@@ -76,6 +83,8 @@ func _ready():
   get_tree().get_root().call_deferred("add_child", _target)
 
   _target_zoom = Vector2(zoom)
+
+  Store.connect("state_changed", self, "_on_store_state_changed")
 
 func _unhandled_input(event):
   if event is InputEventMouseButton:
