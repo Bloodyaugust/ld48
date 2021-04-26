@@ -42,7 +42,7 @@ func _on_store_state_changed(state_key: String, substate):
   match state_key:
     "game":
       match substate:
-        GameConstants.GAME_STARTING:
+        GameConstants.GAME_OVER:
           set_target_position(Vector2(0, 125))
 
 func _on_target_draw():
