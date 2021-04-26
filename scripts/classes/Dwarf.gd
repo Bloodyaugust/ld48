@@ -200,7 +200,7 @@ func _process(delta):
     else:
       _wander()
 
-  if _health <= 0:
+  if _health <= 0 || _thirst > 10:
     queue_free()
 
 func _ready():
