@@ -41,6 +41,9 @@ var _thirst: float = 0
 var _wander_time: float
 var _wander_direction: Vector2
 
+func damage(amount: float):
+  _health -= amount
+
 func _idle():
   modulate = Color.purple
   _drinking_target = null

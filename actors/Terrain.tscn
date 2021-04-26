@@ -16,3 +16,9 @@ collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PoolVector2Array( -52.1539, -69.6154, 51.0837, -71.0296, 51.7908, -44.8666, 70.8827, -43.4524, 70.1756, 45.643, 46.841, 44.2288, 53.205, 72.5131, -48.6184, 72.5131, -45.0829, 53.4212, -70.5387, 49.8857, -71.9529, -45.5737, -54.2752, -49.8164 )
