@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://sprites/dwarf/dwarf_arm.png" type="Texture" id=1]
 [ext_resource path="res://sprites/dwarf/dwarf_head.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://sprites/pick_iron.png" type="Texture" id=4]
 [ext_resource path="res://sprites/dwarf/dwarf_body.png" type="Texture" id=5]
 [ext_resource path="res://scripts/classes/Dwarf.gd" type="Script" id=6]
+[ext_resource path="res://sprites/mug.png" type="Texture" id=7]
 
 [sub_resource type="PhysicsMaterial" id=1]
 bounce = 0.2
@@ -13,11 +14,91 @@ bounce = 0.2
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 11.0334, 33.287 )
 
+[sub_resource type="Animation" id=6]
+resource_name = "drink"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyContainer/Arm/Mug:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BodyContainer/Arm/Tool:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BodyContainer/Arm:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 100.479, 119.258, 100.816 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyContainer/Arm:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -0.106064, 4.90323 ), Vector2( -0.106064, 0.132767 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BodyContainer/Arm/Mug:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BodyContainer/Arm/Tool:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
 [sub_resource type="Animation" id=3]
 resource_name = "mine"
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Arm:rotation_degrees")
+tracks/0/path = NodePath("BodyContainer/Arm:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -29,7 +110,7 @@ tracks/0/keys = {
 "values": [ 0.0, 225.3, 44.9 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Arm/Tool:rotation_degrees")
+tracks/1/path = NodePath("BodyContainer/Arm/Tool:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -41,9 +122,27 @@ tracks/1/keys = {
 "values": [ 220.451, 220.451, 233.208, 214.264, 215.811, 232.768 ]
 }
 
+[sub_resource type="Animation" id=5]
+resource_name = "valuables"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyContainer/Arm:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 144.446, 217.519 ]
+}
+
 [node name="Dwarf" type="RigidBody2D" groups=[
 "Dwarves",
 ]]
+z_index = 4
 collision_mask = 2
 mode = 2
 mass = 5.0
@@ -67,38 +166,6 @@ thirst_rate = 0.5
 position = Vector2( -0.314941, 3.05176e-05 )
 shape = SubResource( 2 )
 
-[node name="Body" type="Sprite" parent="."]
-position = Vector2( 0.56076, 7.83217 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 5 )
-
-[node name="Head" type="Sprite" parent="."]
-position = Vector2( -0.494232, -13.1743 )
-scale = Vector2( 0.5, 0.5 )
-z_index = -2
-texture = ExtResource( 2 )
-
-[node name="Leg" type="Sprite" parent="."]
-position = Vector2( 0.190704, 24.9334 )
-scale = Vector2( 0.5, 0.5 )
-z_index = -2
-texture = ExtResource( 3 )
-
-[node name="Arm" type="Sprite" parent="."]
-position = Vector2( -0.106064, 4.90323 )
-rotation = 3.78282
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 1 )
-offset = Vector2( 0.212128, 18.2195 )
-
-[node name="Tool" type="Sprite" parent="Arm"]
-position = Vector2( 3.20611, 53.9678 )
-rotation = 3.97954
-scale = Vector2( 0.3, 0.3 )
-z_index = -1
-texture = ExtResource( 4 )
-flip_h = true
-
 [node name="CastUp" type="RayCast2D" parent="."]
 position = Vector2( -11.6543, -33.3879 )
 rotation = 0.698132
@@ -121,5 +188,51 @@ enabled = true
 cast_to = Vector2( 20, 0 )
 collision_mask = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="BodyContainer" type="Node2D" parent="."]
+
+[node name="Body" type="Sprite" parent="BodyContainer"]
+position = Vector2( 0.56076, 7.83217 )
+scale = Vector2( 0.5, 0.5 )
+z_index = -2
+texture = ExtResource( 5 )
+
+[node name="Head" type="Sprite" parent="BodyContainer"]
+position = Vector2( -0.494232, -13.1743 )
+scale = Vector2( 0.5, 0.5 )
+z_index = -2
+texture = ExtResource( 2 )
+
+[node name="Leg" type="Sprite" parent="BodyContainer"]
+position = Vector2( 0.190704, 24.9334 )
+scale = Vector2( 0.5, 0.5 )
+z_index = -2
+texture = ExtResource( 3 )
+
+[node name="Arm" type="Sprite" parent="BodyContainer"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+offset = Vector2( 0.212128, 18.2195 )
+
+[node name="Mug" type="Sprite" parent="BodyContainer/Arm"]
+visible = false
+position = Vector2( -11.2651, 33.1695 )
+rotation = 4.72521
+scale = Vector2( 2, 2 )
+z_index = -1
+texture = ExtResource( 7 )
+
+[node name="Tool" type="Sprite" parent="BodyContainer/Arm"]
+position = Vector2( 3.20611, 53.9678 )
+rotation = 3.8476
+scale = Vector2( 0.3, 0.3 )
+z_index = -1
+texture = ExtResource( 4 )
+flip_h = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BodyContainer"]
+root_node = NodePath("../..")
+autoplay = "idle"
+anims/drink = SubResource( 6 )
+anims/idle = SubResource( 4 )
 anims/mine = SubResource( 3 )
+anims/valuables = SubResource( 5 )

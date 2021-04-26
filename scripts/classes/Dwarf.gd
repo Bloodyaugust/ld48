@@ -19,16 +19,18 @@ export var stamina_regen_rate: float
 export var stamina_max: float
 export var thirst_rate: float
 
+onready var _animation_player: AnimationPlayer = $"./BodyContainer/AnimationPlayer"
+onready var _body_container: Node2D = $"./BodyContainer"
 onready var _cast_up: RayCast2D = $"./CastUp"
 onready var _health: float = starting_health
 onready var _mine_cast_down: RayCast2D = $"./MineCastDown"
 onready var _mine_cast_left: RayCast2D = $"./MineCastLeft"
 onready var _mine_cast_right: RayCast2D = $"./MineCastRight"
-onready var _sprite_body: Sprite = $"./Body"
-onready var _sprite_head: Sprite = $"./Head"
-onready var _sprite_leg: Sprite = $"./Leg"
-onready var _sprite_tool: Sprite = $"./Tool"
-onready var _sprite_arm: Sprite = $"./Arm"
+onready var _sprite_body: Sprite = $"./BodyContainer/Body"
+onready var _sprite_head: Sprite = $"./BodyContainer/Head"
+onready var _sprite_leg: Sprite = $"./BodyContainer/Leg"
+onready var _sprite_tool: Sprite = $"./BodyContainer/Arm/Tool"
+onready var _sprite_arm: Sprite = $"./BodyContainer/Arm"
 onready var _state: int = DWARF_STATE.IDLE
 onready var _tree: SceneTree = get_tree()
 
@@ -48,40 +50,30 @@ func _idle():
   modulate = Color.purple
   _drinking_target = null
   _mining_target = null
+  _animation_player.play("idle")
   _state = DWARF_STATE.IDLE
 
 func _set_facing(is_right):
-  _sprite_body.flip_h = is_right
-  _sprite_head.flip_h = is_right
-  _sprite_leg.flip_h = is_right
-  _sprite_arm.flip_h = is_right
-  _sprite_tool.flip_h = !is_right
-
   if is_right:
-    _sprite_body.position.x = -abs(_sprite_body.position.x)
-    _sprite_head.position.x = -abs(_sprite_head.position.x)
-    _sprite_leg.position.x = -abs(_sprite_leg.position.x)
-    _sprite_arm.position.x = -abs(_sprite_arm.position.x)
-    _sprite_tool.position.x = abs(_sprite_tool.position.x)
+    _body_container.scale.x = -1
   else:
-    _sprite_body.position.x = abs(_sprite_body.position.x)
-    _sprite_head.position.x = abs(_sprite_head.position.x)
-    _sprite_leg.position.x = abs(_sprite_leg.position.x)
-    _sprite_arm.position.x = abs(_sprite_arm.position.x)
-    _sprite_tool.position.x = -abs(_sprite_tool.position.x)
+    _body_container.scale.x = 1
 
 func _seek_valuables():
   modulate = Color.gold
+  _animation_player.play("valuables")
   _state = DWARF_STATE.VALUABLES
 
 func _start_drinking():
   modulate = Color.yellowgreen
+  _animation_player.play("drink")
   _state = DWARF_STATE.DRINKING
 
 func _start_mining():
   modulate = Color.red
   _mining_time_left = mine_time
   _stamina -= mine_stamina_cost
+  _animation_player.play("mine")
   _state = DWARF_STATE.MINING
 
 func _integrate_forces(state):
@@ -101,6 +93,8 @@ func _integrate_forces(state):
     !_closest_valuable.is_queued_for_deletion() &&
     (!_mine_cast_right.is_colliding() || !_mine_cast_left.is_colliding())):
     linear_velocity.x = (1 if _closest_valuable.global_position.x > global_position.x else -1) * 250
+
+  _set_facing(linear_velocity.x > 0)
 
 func _physics_process(delta):
   if _cast_up.is_colliding() && abs(linear_velocity.y) <= 5:
@@ -216,10 +210,8 @@ func _wander():
   match _wander_direction_randomizer:
     0:
       _wander_direction = Vector2.LEFT
-      _set_facing(false)
     1:
       _wander_direction = Vector2.RIGHT
-      _set_facing(true)
     _:
       _wander_direction = Vector2.ZERO
 
