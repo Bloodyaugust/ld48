@@ -11,8 +11,10 @@ func _on_state_changed(state_key: String, substate):
       match substate:
         ClientConstants.CLIENT_VIEW_MAIN_MENU:
           rect_position.y = 0
+          visible = true
         _:
           rect_position.y = get_viewport().size.y
+          visible = false
 
 func _ready():
   _play_button.connect("pressed", self, "_on_play_button_pressed")

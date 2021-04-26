@@ -42,13 +42,14 @@ func _on_store_state_changed(state_key: String, substate):
       match substate:
         GameConstants.GAME_STARTING:
           _generate_layer()
+          _generate_layer()
         GameConstants.GAME_OVER:
           GDUtil.queue_free_children(_terrain_layers)
           _current_layer = 0
           _next_layer_indicator.global_position = Vector2(0, 120)
 
 func _on_tile_mined(y_position: float):
-  if y_position / 128 >= _current_layer:
+  if y_position / 128 >= _current_layer - 1:
     _generate_layer()
 
 func _ready():
