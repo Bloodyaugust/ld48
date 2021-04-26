@@ -18,6 +18,7 @@ export var stamina_regen_rate: float
 export var stamina_max: float
 export var thirst_rate: float
 
+onready var _cast_up: RayCast2D = $"./CastUp"
 onready var _health: float = starting_health
 onready var _mine_cast_down: RayCast2D = $"./MineCastDown"
 onready var _mine_cast_left: RayCast2D = $"./MineCastLeft"
@@ -86,12 +87,15 @@ func _integrate_forces(state):
     linear_velocity.x = (1 if _drinking_target.global_position.x > global_position.x else -1) * 200
 
 func _physics_process(delta):
+  if _cast_up.is_colliding() && abs(linear_velocity.y) <= 5:
+    apply_central_impulse(Vector2.DOWN * 1000)
+
   if !_mine_cast_down.is_colliding():
     if _mine_cast_left.is_colliding():
       apply_central_impulse(Vector2.RIGHT * 100)
     elif _mine_cast_right.is_colliding():
       apply_central_impulse(Vector2.LEFT * 100)
-    elif get_colliding_bodies().size() >= 1:
+    elif get_colliding_bodies().size() >= 1 && !_cast_up.is_colliding():
       apply_central_impulse((Vector2.UP + Vector2(rand_range(-0.45, 0.45), 0)).normalized() * 1000)
 
 func _process(delta):

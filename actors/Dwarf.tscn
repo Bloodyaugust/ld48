@@ -63,6 +63,13 @@ position = Vector2( 0, 14.013 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 1 )
 
+[node name="CastUp" type="RayCast2D" parent="."]
+position = Vector2( -11.6543, -33.3879 )
+rotation = 0.698132
+enabled = true
+cast_to = Vector2( 0, -30 )
+collision_mask = 2
+
 [node name="MineCastDown" type="RayCast2D" parent="."]
 enabled = true
 cast_to = Vector2( 0, 40 )
