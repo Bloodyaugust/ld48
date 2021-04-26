@@ -19,7 +19,7 @@ func start_game():
   set_state("client_view", ClientConstants.CLIENT_VIEW_NONE)
   set_state("game", GameConstants.GAME_STARTING)
   set_state("layer", 0)
-  set_state("money", 10)
+  set_state("money", 15)
   set_state("selected_placeable", "")
 
 func _initialize():
