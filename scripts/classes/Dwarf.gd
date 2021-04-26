@@ -47,7 +47,6 @@ func damage(amount: float):
   _health -= amount
 
 func _idle():
-  modulate = Color.purple
   _drinking_target = null
   _mining_target = null
   _animation_player.play("idle")
@@ -60,17 +59,14 @@ func _set_facing(is_right):
     _body_container.scale.x = 1
 
 func _seek_valuables():
-  modulate = Color.gold
   _animation_player.play("valuables")
   _state = DWARF_STATE.VALUABLES
 
 func _start_drinking():
-  modulate = Color.yellowgreen
   _animation_player.play("drink")
   _state = DWARF_STATE.DRINKING
 
 func _start_mining():
-  modulate = Color.red
   _mining_time_left = mine_time
   _stamina -= mine_stamina_cost
   _animation_player.play("mine")
@@ -215,7 +211,6 @@ func _wander():
     _:
       _wander_direction = Vector2.ZERO
 
-  modulate = Color.blue
   _state = DWARF_STATE.WANDERING
 
 func _get_ales_sorted_distance() -> Array:
