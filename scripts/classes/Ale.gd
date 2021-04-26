@@ -16,7 +16,7 @@ func drink(amount: float) -> float:
   return _drank
 
 func _input_event(viewport, event, shape_idx):
-  if event is InputEventMouseButton && event.button_index == BUTTON_LEFT:
+  if event is InputEventMouseButton && event.button_index == BUTTON_LEFT && Store.state.selected_placeable == "":
     if event.pressed:
       _dragging = true
       Input.set_default_cursor_shape(Input.CURSOR_MOVE)
@@ -28,11 +28,11 @@ func _integrate_forces(state):
   linear_velocity = linear_velocity.clamped(500)
 
 func _mouse_entered():
-  if !_dragging:
+  if !_dragging && Store.state.selected_placeable == "":
     Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
 
 func _mouse_exited():
-  if !_dragging:
+  if !_dragging && Store.state.selected_placeable == "":
     Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 
 func _physics_process(delta):
