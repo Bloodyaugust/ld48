@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://views/fps.gd" type="Script" id=1]
 [ext_resource path="res://scripts/controllers/GameIntializationController.gd" type="Script" id=2]
@@ -29,6 +29,8 @@ colors = PoolColorArray( 0.195313, 0.191498, 0.191498, 1, 0.210938, 0.177155, 0.
 [sub_resource type="GradientTexture" id=3]
 gradient = SubResource( 2 )
 width = 1152
+
+[sub_resource type="CircleShape2D" id=4]
 
 [node name="Node2D" type="Node2D"]
 
@@ -259,6 +261,14 @@ position = Vector2( 640, -64 )
 
 [node name="PlayerPlacementController" type="Node2D" parent="."]
 script = ExtResource( 8 )
+
+[node name="Area2D" type="Area2D" parent="PlayerPlacementController"]
+input_pickable = false
+collision_layer = 524288
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerPlacementController/Area2D"]
+shape = SubResource( 4 )
 
 [node name="PlayerShopController" type="Node" parent="."]
 script = ExtResource( 9 )
