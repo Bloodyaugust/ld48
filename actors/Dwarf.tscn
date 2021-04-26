@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://sprites/dwarf/dwarf_arm.png" type="Texture" id=1]
 [ext_resource path="res://sprites/dwarf/dwarf_head.png" type="Texture" id=2]
@@ -12,6 +12,34 @@ bounce = 0.2
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 11.0334, 33.287 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "mine"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Arm:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 0.8 ),
+"transitions": PoolRealArray( 0.554785, 1.7411, 4.14106 ),
+"update": 0,
+"values": [ 0.0, 225.3, 44.9 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Arm/Tool:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 0.6, 0.7, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 220.451, 220.451, 233.208, 214.264, 215.811, 232.768 ]
+}
 
 [node name="Dwarf" type="RigidBody2D" groups=[
 "Dwarves",
@@ -47,23 +75,29 @@ texture = ExtResource( 5 )
 [node name="Head" type="Sprite" parent="."]
 position = Vector2( -0.494232, -13.1743 )
 scale = Vector2( 0.5, 0.5 )
+z_index = -2
 texture = ExtResource( 2 )
 
 [node name="Leg" type="Sprite" parent="."]
 position = Vector2( 0.190704, 24.9334 )
 scale = Vector2( 0.5, 0.5 )
+z_index = -2
 texture = ExtResource( 3 )
 
-[node name="Tool" type="Sprite" parent="."]
-position = Vector2( -9.391, 14.847 )
-scale = Vector2( 0.15, 0.15 )
-texture = ExtResource( 4 )
-flip_h = true
-
 [node name="Arm" type="Sprite" parent="."]
-position = Vector2( 0, 14.013 )
+position = Vector2( -0.106064, 4.90323 )
+rotation = 3.78282
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 1 )
+offset = Vector2( 0.212128, 18.2195 )
+
+[node name="Tool" type="Sprite" parent="Arm"]
+position = Vector2( 3.20611, 53.9678 )
+rotation = 3.97954
+scale = Vector2( 0.3, 0.3 )
+z_index = -1
+texture = ExtResource( 4 )
+flip_h = true
 
 [node name="CastUp" type="RayCast2D" parent="."]
 position = Vector2( -11.6543, -33.3879 )
@@ -86,3 +120,6 @@ collision_mask = 2
 enabled = true
 cast_to = Vector2( 20, 0 )
 collision_mask = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/mine = SubResource( 3 )
