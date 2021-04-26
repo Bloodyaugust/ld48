@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/ld48 synth - mine3 - MAIN.ogg-397d8255ed9b511dc05450621f8aa0b6.oggstr"
+
+[deps]
+
+source_file="res://resources/sounds/sfx/ld48 synth - mine3 - MAIN.ogg"
+dest_files=[ "res://.import/ld48 synth - mine3 - MAIN.ogg-397d8255ed9b511dc05450621f8aa0b6.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

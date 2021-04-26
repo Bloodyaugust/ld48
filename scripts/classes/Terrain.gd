@@ -12,6 +12,9 @@ func initialize(type: String) -> void:
   _health = _data.health
   _value = _data.value
 
+  if _value > 0:
+    add_to_group("Valuables")
+
 func mine(damage: float) -> void:
   if _health > 0 && _health - damage <= 0:
     if _value > 0:

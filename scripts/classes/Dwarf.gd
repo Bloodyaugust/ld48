@@ -4,6 +4,7 @@ enum DWARF_STATE {
   IDLE,
   DRINKING,
   MINING,
+  VALUABLES,
   WANDERING,
 }
 
@@ -31,6 +32,7 @@ onready var _sprite_arm: Sprite = $"./Arm"
 onready var _state: int = DWARF_STATE.IDLE
 onready var _tree: SceneTree = get_tree()
 
+var _closest_valuable: Node2D = null
 var _drinking_target: Node2D
 var _mining_time_left: float = 0
 var _stamina: float = 0
@@ -65,6 +67,10 @@ func _set_facing(is_right):
     _sprite_arm.position.x = abs(_sprite_arm.position.x)
     _sprite_tool.position.x = -abs(_sprite_tool.position.x)
 
+func _seek_valuables():
+  modulate = Color.gold
+  _state = DWARF_STATE.VALUABLES
+
 func _start_drinking():
   modulate = Color.yellowgreen
   _state = DWARF_STATE.DRINKING
@@ -86,6 +92,13 @@ func _integrate_forces(state):
     abs(global_position.x - _drinking_target.global_position.x) > drink_range):
     linear_velocity.x = (1 if _drinking_target.global_position.x > global_position.x else -1) * 200
 
+  if (_state == DWARF_STATE.VALUABLES &&
+    _mine_cast_down.is_colliding() &&
+    is_instance_valid(_closest_valuable) &&
+    !_closest_valuable.is_queued_for_deletion() &&
+    (!_mine_cast_right.is_colliding() || !_mine_cast_left.is_colliding())):
+    linear_velocity.x = (1 if _closest_valuable.global_position.x > global_position.x else -1) * 250
+
 func _physics_process(delta):
   if _cast_up.is_colliding() && abs(linear_velocity.y) <= 5:
     apply_central_impulse(Vector2.DOWN * 1000)
@@ -99,6 +112,8 @@ func _physics_process(delta):
       apply_central_impulse((Vector2.UP + Vector2(rand_range(-0.45, 0.45), 0)).normalized() * 1000)
 
 func _process(delta):
+  _closest_valuable = _get_closest_valuable()
+
   if _state != DWARF_STATE.DRINKING:
     _thirst += delta * thirst_rate
 
@@ -107,6 +122,20 @@ func _process(delta):
 
   if (_state == DWARF_STATE.IDLE || _state == DWARF_STATE.WANDERING) && _thirst >= drink_threshold:
     _start_drinking()
+
+  if (_state == DWARF_STATE.IDLE || _state == DWARF_STATE.WANDERING) && is_instance_valid(_closest_valuable) && !_closest_valuable.is_queued_for_deletion():
+    _seek_valuables()
+
+  if _state == DWARF_STATE.VALUABLES:
+    if is_instance_valid((_closest_valuable)) && !_closest_valuable.is_queued_for_deletion():
+      if _mine_cast_left.is_colliding():
+        _mining_target = _mine_cast_left.get_collider().get_parent()
+        _start_mining()
+      elif _mine_cast_right.is_colliding():
+        _mining_target = _mine_cast_right.get_collider().get_parent()
+        _start_mining()
+    else:
+      _idle()
 
   if _state == DWARF_STATE.DRINKING:
     var _ales = _get_ales_sorted_distance()
@@ -162,6 +191,20 @@ func _ready():
   _stamina = rand_range(0, stamina_max)
   _thirst = rand_range(drink_threshold / 2, drink_threshold - 1)
   _idle()
+
+func _get_closest_valuable() -> Node2D:
+  var _valuables: Array = _tree.get_nodes_in_group("Valuables")
+  var _valuables_in_layer: Array = []
+
+  for _valuable in _valuables:
+    if abs(_valuable.global_position.y - global_position.y) < 32:
+      _valuables_in_layer.append(_valuable)
+
+  if _valuables_in_layer.size() > 0:
+    _valuables_in_layer.sort_custom(self, "_sort_by_distance")
+    return _valuables_in_layer[0]
+
+  return null
 
 func _wander():
   var _wander_direction_randomizer = randi() % 3

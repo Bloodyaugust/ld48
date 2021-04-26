@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/ld48 synth - quenched - MAIN.ogg-51147cb1eb12be375d1659a293f8d500.oggstr"
+
+[deps]
+
+source_file="res://resources/sounds/sfx/ld48 synth - quenched - MAIN.ogg"
+dest_files=[ "res://.import/ld48 synth - quenched - MAIN.ogg-51147cb1eb12be375d1659a293f8d500.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

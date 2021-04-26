@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/ld48 synth - thirsty - MAIN.ogg-c659ea02b096a37e95e9abea131819e5.oggstr"
+
+[deps]
+
+source_file="res://resources/sounds/sfx/ld48 synth - thirsty - MAIN.ogg"
+dest_files=[ "res://.import/ld48 synth - thirsty - MAIN.ogg-c659ea02b096a37e95e9abea131819e5.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
