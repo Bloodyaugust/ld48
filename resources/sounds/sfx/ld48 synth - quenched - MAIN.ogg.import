@@ -11,5 +11,5 @@ dest_files=[ "res://.import/ld48 synth - quenched - MAIN.ogg-51147cb1eb12be375d1
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

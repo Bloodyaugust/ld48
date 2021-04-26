@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://views/fps.gd" type="Script" id=1]
 [ext_resource path="res://scripts/controllers/GameIntializationController.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://views/main_menu.gd" type="Script" id=4]
 [ext_resource path="res://lib/BetterCam.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scripts/controllers/GameOverController.gd" type="Script" id=6]
+[ext_resource path="res://resources/sounds/tunes/ld48 synth - dwarves at work - MAIN.ogg" type="AudioStream" id=7]
 [ext_resource path="res://scripts/controllers/PlayerPlacementController.gd" type="Script" id=8]
 [ext_resource path="res://scripts/controllers/PlayerShopController.gd" type="Script" id=9]
 [ext_resource path="res://views/resources.gd" type="Script" id=10]
@@ -13,7 +14,11 @@
 [ext_resource path="res://sprites/dwarf/dwarf_head.png" type="Texture" id=12]
 [ext_resource path="res://sprites/barrel.png" type="Texture" id=13]
 [ext_resource path="res://scripts/controllers/TerrainGenerationController.gd" type="Script" id=14]
+[ext_resource path="res://resources/sounds/tunes/ld48 title theme - MAIN.ogg" type="AudioStream" id=15]
 [ext_resource path="res://doodads/Blocker.tscn" type="PackedScene" id=16]
+[ext_resource path="res://resources/sounds/tunes/ld48 synth - upscale bar theme - MAIN.ogg" type="AudioStream" id=17]
+[ext_resource path="res://resources/sounds/tunes/ld48 synth - scary-remix - MAIN.ogg" type="AudioStream" id=18]
+[ext_resource path="res://scripts/controllers/MusicController.gd" type="Script" id=19]
 
 [sub_resource type="StyleBoxFlat" id=1]
 draw_center = false
@@ -281,3 +286,24 @@ script = ExtResource( 2 )
 
 [node name="GameOverController" type="Node" parent="."]
 script = ExtResource( 6 )
+
+[node name="MusicController" type="Node" parent="."]
+script = ExtResource( 19 )
+
+[node name="track-0" type="AudioStreamPlayer" parent="MusicController"]
+stream = ExtResource( 15 )
+bus = "Music"
+
+[node name="track-1" type="AudioStreamPlayer" parent="MusicController"]
+stream = ExtResource( 7 )
+bus = "Music"
+
+[node name="track-2" type="AudioStreamPlayer" parent="MusicController"]
+stream = ExtResource( 17 )
+bus = "Music"
+
+[node name="track-3" type="AudioStreamPlayer" parent="MusicController"]
+stream = ExtResource( 18 )
+bus = "Music"
+
+[node name="track-tween" type="Tween" parent="MusicController"]

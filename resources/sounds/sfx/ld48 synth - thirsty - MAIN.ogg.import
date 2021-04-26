@@ -11,5 +11,5 @@ dest_files=[ "res://.import/ld48 synth - thirsty - MAIN.ogg-c659ea02b096a37e95e9
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

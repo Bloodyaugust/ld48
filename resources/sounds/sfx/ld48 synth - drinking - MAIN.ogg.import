@@ -11,5 +11,5 @@ dest_files=[ "res://.import/ld48 synth - drinking - MAIN.ogg-ae3fbebd8c9854dd5a4
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

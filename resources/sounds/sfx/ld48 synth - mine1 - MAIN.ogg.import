@@ -11,5 +11,5 @@ dest_files=[ "res://.import/ld48 synth - mine1 - MAIN.ogg-6cda1972df24fa8b8f5d64
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

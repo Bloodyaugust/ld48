@@ -31,6 +31,7 @@ func _generate_layer():
   _next_layer_indicator.translate(Vector2(0, 128))
 
   _current_layer += 1
+  Store.set_state("layer", _current_layer)
 
   if _current_layer == 22:
     Store.set_state("game", GameConstants.GAME_OVER)

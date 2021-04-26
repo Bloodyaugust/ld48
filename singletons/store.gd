@@ -5,6 +5,7 @@ signal state_changed(state_key, substate)
 var state: Dictionary = {
   "client_view": "",
   "game": "",
+  "layer": 0,
   "money": 0,
   "selected_placeable": ""
  }
@@ -17,6 +18,7 @@ func set_state(state_key: String, new_state) -> void:
 func start_game():
   set_state("client_view", ClientConstants.CLIENT_VIEW_NONE)
   set_state("game", GameConstants.GAME_STARTING)
+  set_state("layer", 0)
   set_state("money", 10)
   set_state("selected_placeable", "")
 
