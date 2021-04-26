@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://views/fps.gd" type="Script" id=1]
 [ext_resource path="res://scripts/controllers/GameIntializationController.gd" type="Script" id=2]
@@ -19,6 +19,8 @@
 [ext_resource path="res://resources/sounds/tunes/ld48 synth - upscale bar theme - MAIN.ogg" type="AudioStream" id=17]
 [ext_resource path="res://resources/sounds/tunes/ld48 synth - scary-remix - MAIN.ogg" type="AudioStream" id=18]
 [ext_resource path="res://scripts/controllers/MusicController.gd" type="Script" id=19]
+[ext_resource path="res://sprites/mine_left.png" type="Texture" id=20]
+[ext_resource path="res://sprites/mine_down.png" type="Texture" id=21]
 
 [sub_resource type="StyleBoxFlat" id=1]
 draw_center = false
@@ -156,22 +158,22 @@ __meta__ = {
 [node name="PlaceablesContainer" type="HBoxContainer" parent="UIRoot/Placeables"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 148.0
+margin_right = 370.0
 margin_bottom = 74.0
 custom_constants/separation = 10
 alignment = 1
 
-[node name="cask" type="TextureRect" parent="UIRoot/Placeables/PlaceablesContainer"]
+[node name="mine_left" type="TextureRect" parent="UIRoot/Placeables/PlaceablesContainer"]
 margin_right = 64.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 64, 64 )
 mouse_filter = 0
 mouse_default_cursor_shape = 2
-texture = ExtResource( 13 )
+texture = ExtResource( 20 )
 expand = true
 stretch_mode = 6
 
-[node name="Label" type="Label" parent="UIRoot/Placeables/PlaceablesContainer/cask"]
+[node name="Label" type="Label" parent="UIRoot/Placeables/PlaceablesContainer/mine_left"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -181,14 +183,92 @@ margin_top = -24.0
 custom_colors/font_color = Color( 1, 0.752941, 0.101961, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_as_outline = 5
-text = "10"
+text = "2"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="selected" type="Panel" parent="UIRoot/Placeables/PlaceablesContainer/cask"]
+[node name="selected" type="Panel" parent="UIRoot/Placeables/PlaceablesContainer/mine_left"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="mine_right" type="TextureRect" parent="UIRoot/Placeables/PlaceablesContainer"]
+margin_left = 74.0
+margin_right = 138.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+texture = ExtResource( 20 )
+expand = true
+stretch_mode = 6
+flip_h = true
+
+[node name="Label" type="Label" parent="UIRoot/Placeables/PlaceablesContainer/mine_right"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -24.0
+custom_colors/font_color = Color( 1, 0.752941, 0.101961, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "2"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="selected" type="Panel" parent="UIRoot/Placeables/PlaceablesContainer/mine_right"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="mine_down" type="TextureRect" parent="UIRoot/Placeables/PlaceablesContainer"]
+margin_left = 148.0
+margin_right = 212.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+texture = ExtResource( 21 )
+expand = true
+stretch_mode = 6
+flip_h = true
+
+[node name="Label" type="Label" parent="UIRoot/Placeables/PlaceablesContainer/mine_down"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -24.0
+custom_colors/font_color = Color( 1, 0.752941, 0.101961, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "2"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="selected" type="Panel" parent="UIRoot/Placeables/PlaceablesContainer/mine_down"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -199,8 +279,8 @@ __meta__ = {
 }
 
 [node name="dwarf" type="TextureRect" parent="UIRoot/Placeables/PlaceablesContainer"]
-margin_left = 74.0
-margin_right = 138.0
+margin_left = 222.0
+margin_right = 286.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 64, 64 )
 mouse_filter = 0
@@ -227,6 +307,47 @@ __meta__ = {
 }
 
 [node name="selected" type="Panel" parent="UIRoot/Placeables/PlaceablesContainer/dwarf"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="cask" type="TextureRect" parent="UIRoot/Placeables/PlaceablesContainer"]
+margin_left = 296.0
+margin_right = 360.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+texture = ExtResource( 13 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UIRoot/Placeables/PlaceablesContainer/cask"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -24.0
+custom_colors/font_color = Color( 1, 0.752941, 0.101961, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "10"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="selected" type="Panel" parent="UIRoot/Placeables/PlaceablesContainer/cask"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0

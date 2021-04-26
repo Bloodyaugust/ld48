@@ -50,5 +50,11 @@ func _ready():
         _placeable_scenes["cask"] = load("res://actors/Ale.tscn")
       "dwarf":
         _placeable_scenes["dwarf"] = load("res://actors/Dwarf.tscn")
+      "mine_left":
+        _placeable_scenes["mine_left"] = load("res://actors/MineLeft.tscn")
+      "mine_right":
+        _placeable_scenes["mine_right"] = load("res://actors/MineRight.tscn")
+      "mine_down":
+        _placeable_scenes["mine_down"] = load("res://actors/MineDown.tscn")
       _:
         pass

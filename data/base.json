@@ -170,6 +170,18 @@
 				{
 					"type": "dwarf",
 					"cost": 5
+				},
+				{
+					"type": "mine_left",
+					"cost": 2
+				},
+				{
+					"type": "mine_right",
+					"cost": 2
+				},
+				{
+					"type": "mine_down",
+					"cost": 2
 				}
 			],
 			"separators": [],

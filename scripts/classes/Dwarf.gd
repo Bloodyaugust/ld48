@@ -38,6 +38,7 @@ var _closest_valuable: Node2D = null
 var _drinking_target: Node2D
 var _mining_time_left: float = 0
 var _stamina: float = 0
+var _mining_instruction_direction: Vector2 = Vector2.ZERO
 var _mining_target: Node2D
 var _thirst: float = 0
 var _wander_time: float
@@ -110,6 +111,13 @@ func _physics_process(delta):
 func _process(delta):
   _closest_valuable = _get_closest_valuable()
 
+  var _closest_mining_instruction: Node2D = _get_closest_mining_instruction()
+
+  if _closest_mining_instruction:
+    _mining_instruction_direction = _closest_mining_instruction.direction
+  else:
+    _mining_instruction_direction = Vector2.ZERO
+
   if _state != DWARF_STATE.DRINKING:
     _thirst += delta * thirst_rate
 
@@ -119,7 +127,7 @@ func _process(delta):
   if (_state == DWARF_STATE.IDLE || _state == DWARF_STATE.WANDERING) && _thirst >= drink_threshold:
     _start_drinking()
 
-  if (_state == DWARF_STATE.IDLE || _state == DWARF_STATE.WANDERING) && is_instance_valid(_closest_valuable) && !_closest_valuable.is_queued_for_deletion():
+  if (_state == DWARF_STATE.IDLE || _state == DWARF_STATE.WANDERING) && _mining_instruction_direction == Vector2.ZERO && is_instance_valid(_closest_valuable) && !_closest_valuable.is_queued_for_deletion():
     _seek_valuables()
 
   if _state == DWARF_STATE.VALUABLES:
@@ -172,11 +180,23 @@ func _process(delta):
 
   if _state == DWARF_STATE.IDLE:
     if _stamina >= mine_stamina_cost:
-      var _mining_target_block_collider = _mine_cast_down.get_collider()
+      var _mining_target_block_collider: Object
+
+      if _mining_instruction_direction != Vector2.ZERO:
+        if _mining_instruction_direction == Vector2.LEFT:
+          _mining_target_block_collider = _mine_cast_left.get_collider()
+        if _mining_instruction_direction == Vector2.RIGHT:
+          _mining_target_block_collider = _mine_cast_right.get_collider()
+        if _mining_instruction_direction == Vector2.DOWN:
+          _mining_target_block_collider = _mine_cast_down.get_collider()
+      else:
+        _mining_target_block_collider = _mine_cast_down.get_collider()
 
       if _mining_target_block_collider:
         _mining_target = _mining_target_block_collider.get_parent()
         _start_mining()
+      else:
+        _wander()
     else:
       _wander()
 
@@ -187,6 +207,20 @@ func _ready():
   _stamina = rand_range(0, stamina_max)
   _thirst = rand_range(drink_threshold / 2, drink_threshold - 1)
   _idle()
+
+func _get_closest_mining_instruction() -> Node2D:
+  var _mining_instructions: Array = _tree.get_nodes_in_group("MineInstructions")
+  var _mining_instructions_in_layer: Array = []
+
+  for _mining_instruction in _mining_instructions:
+    if abs(_mining_instruction.global_position.y - global_position.y) < 32:
+      _mining_instructions_in_layer.append(_mining_instruction)
+
+  if _mining_instructions_in_layer.size() > 0:
+    _mining_instructions_in_layer.sort_custom(self, "_sort_by_distance")
+    return _mining_instructions_in_layer[0]
+
+  return null
 
 func _get_closest_valuable() -> Node2D:
   var _valuables: Array = _tree.get_nodes_in_group("Valuables")
@@ -213,6 +247,12 @@ func _wander():
       _wander_direction = Vector2.RIGHT
     _:
       _wander_direction = Vector2.ZERO
+
+  if _mining_instruction_direction != Vector2.ZERO:
+    _wander_direction = _mining_instruction_direction
+
+  if _wander_direction == Vector2.DOWN:
+    _wander_direction = Vector2.ZERO
 
   _state = DWARF_STATE.WANDERING
 
