@@ -2,12 +2,11 @@ extends Sprite
 
 signal mined
 
-var _data: Dictionary
 var _health: float
 var _value: float
 
 func initialize(type: String) -> void:
-  _data = Castledb.get_entry("terrain", type)
+  var _data: Dictionary = Castledb.get_entry("terrain", type)
   texture = load("res://sprites/terrain/{type}.png".format({"type": type}))
 
   _health = _data.health

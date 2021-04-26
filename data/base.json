@@ -21,6 +21,11 @@
 					"typeStr": "16",
 					"name": "depthRange",
 					"display": null
+				},
+				{
+					"typeStr": "4",
+					"name": "weight",
+					"display": null
 				}
 			],
 			"lines": [
@@ -31,6 +36,77 @@
 					"depthRange": [
 						0,
 						4
+					],
+					"weight": 1
+				},
+				{
+					"type": "gravel_dirt",
+					"health": 20,
+					"value": 0,
+					"weight": 2,
+					"depthRange": [
+						3,
+						8
+					]
+				},
+				{
+					"type": "gravel_stone",
+					"health": 30,
+					"value": 0,
+					"weight": 3,
+					"depthRange": [
+						6,
+						12
+					]
+				},
+				{
+					"type": "greystone",
+					"health": 75,
+					"value": 0,
+					"weight": 4,
+					"depthRange": [
+						11,
+						20
+					]
+				},
+				{
+					"type": "lava",
+					"health": 999,
+					"value": 0,
+					"weight": 0.2,
+					"depthRange": [
+						4,
+						20
+					]
+				},
+				{
+					"type": "mid_lava",
+					"health": 999,
+					"value": 0,
+					"weight": 1,
+					"depthRange": [
+						10,
+						20
+					]
+				},
+				{
+					"type": "early_gold",
+					"health": 15,
+					"value": 15,
+					"weight": 0.2,
+					"depthRange": [
+						2,
+						6
+					]
+				},
+				{
+					"type": "mid_gold",
+					"health": 40,
+					"value": 35,
+					"weight": 0.3,
+					"depthRange": [
+						5,
+						10
 					]
 				}
 			],
