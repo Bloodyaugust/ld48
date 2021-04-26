@@ -158,7 +158,7 @@
 				},
 				{
 					"type": "dwarf",
-					"cost": 20
+					"cost": 5
 				}
 			],
 			"separators": [],
