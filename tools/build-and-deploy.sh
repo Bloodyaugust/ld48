@@ -27,16 +27,16 @@ echo "-----------------------------"
 godot --export "Windows Desktop" build/win/ld48.exe -v
 echo "-----------------------------"
 
-echo "CHANGING FILETYPE AND CHMOD EXECUTABLE FOR OSX"
-echo "-----------------------------"
-cd build/osx/
-mv ld48.dmg ld48-osx-alpha.zip
-unzip ld48-osx-alpha.zip
-rm ld48-osx-alpha.zip
-chmod +x ld48.app/Contents/MacOS/ld48
-zip -r ld48-osx-alpha.zip ld48.app
-rm -rf ld48.app
-cd ../../
+# echo "CHANGING FILETYPE AND CHMOD EXECUTABLE FOR OSX"
+# echo "-----------------------------"
+# cd build/osx/
+# mv ld48.dmg ld48-osx-alpha.zip
+# unzip ld48-osx-alpha.zip
+# rm ld48-osx-alpha.zip
+# chmod +x ld48.app/Contents/MacOS/ld48
+# zip -r ld48-osx-alpha.zip ld48.app
+# rm -rf ld48.app
+# cd ../../
 
 ls -al
 ls -al build/
