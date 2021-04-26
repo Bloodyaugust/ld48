@@ -89,9 +89,11 @@ func _ready():
 func _unhandled_input(event):
   if event is InputEventMouseButton:
     if event.button_index == BUTTON_WHEEL_UP:
-      _target_zoom = _target_zoom - Vector2(camera_zoom_speed, camera_zoom_speed)
+      # _target_zoom = _target_zoom - Vector2(camera_zoom_speed, camera_zoom_speed)
+      _target.translate(Vector2.UP * camera_target_speed * get_process_delta_time())
     if event.button_index == BUTTON_WHEEL_DOWN:
-      _target_zoom = _target_zoom + Vector2(camera_zoom_speed, camera_zoom_speed)
+      # _target_zoom = _target_zoom + Vector2(camera_zoom_speed, camera_zoom_speed)
+      _target.translate(Vector2.DOWN * camera_target_speed * get_process_delta_time())
 
     if event.button_index == BUTTON_WHEEL_UP || event.button_index == BUTTON_WHEEL_DOWN:
       _target.global_position = _target.global_position.linear_interpolate(get_global_mouse_position(), (1 - (zoom.x / zoom_max)) * zoom_follow_scalar)
