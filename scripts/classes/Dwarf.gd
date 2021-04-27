@@ -109,7 +109,8 @@ func _physics_process(delta):
       apply_central_impulse((Vector2.UP + Vector2(rand_range(-0.45, 0.45), 0)).normalized() * 1000)
 
 func _process(delta):
-  _closest_valuable = _get_closest_valuable()
+    _thirst += delta * thirst_rate
+    _closest_valuable = _get_closest_valuable()
 
   var _closest_mining_instruction: Node2D = _get_closest_mining_instruction()
 
@@ -117,9 +118,6 @@ func _process(delta):
     _mining_instruction_direction = _closest_mining_instruction.direction
   else:
     _mining_instruction_direction = Vector2.ZERO
-
-  if _state != DWARF_STATE.DRINKING:
-    _thirst += delta * thirst_rate
 
   if _state == DWARF_STATE.IDLE || _state == DWARF_STATE.WANDERING:
     _stamina = clamp(_stamina + (stamina_regen_rate * delta), 0, stamina_max)
