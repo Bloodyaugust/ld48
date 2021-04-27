@@ -34,8 +34,7 @@ func _generate_layer():
   Store.set_state("layer", _current_layer)
 
   if _current_layer == 22:
-    Store.set_state("game", GameConstants.GAME_OVER)
-    Store.set_state("client_view", ClientConstants.CLIENT_VIEW_MAIN_MENU)
+    Store.set_state("client_view", ClientConstants.CLIENT_VIEW_GAME_OVER)
 
 func _on_store_state_changed(state_key: String, substate):
   match state_key:

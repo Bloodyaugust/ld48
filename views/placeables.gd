@@ -37,6 +37,10 @@ func _on_state_changed(state_key: String, substate):
           visible = false
         GameConstants.GAME_IN_PROGRESS:
           visible = true
+    "client_view":
+      match substate:
+        ClientConstants.CLIENT_VIEW_GAME_OVER:
+          visible = false
 
 func _ready():
   for _placeable in _placeables:
