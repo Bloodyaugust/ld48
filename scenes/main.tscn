@@ -159,7 +159,8 @@ margin_top = 136.0
 margin_right = 930.0
 margin_bottom = 268.0
 text = "Mine deeper and deeper
-Dwarves need Ale
+Dwarves need Ale, use it to group your dwarves
+Ale can be dragged around
 Avoid hazardous things in the deep
 Instruct your dwarves on where to mine
 Buy more dwarves to mine faster"

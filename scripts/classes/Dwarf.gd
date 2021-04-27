@@ -109,8 +109,8 @@ func _physics_process(delta):
       apply_central_impulse((Vector2.UP + Vector2(rand_range(-0.45, 0.45), 0)).normalized() * 1000)
 
 func _process(delta):
-    _thirst += delta * thirst_rate
-    _closest_valuable = _get_closest_valuable()
+  _thirst += delta * thirst_rate
+  _closest_valuable = _get_closest_valuable()
 
   var _closest_mining_instruction: Node2D = _get_closest_mining_instruction()
 
