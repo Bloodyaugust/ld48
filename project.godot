@@ -29,7 +29,7 @@ _global_script_class_icons={
 config/name="Dwarvelings"
 config/description="Lemmings but with dwarves and mining"
 run/main_scene="res://scenes/main.tscn"
-config/icon="res://icon.png"
+config/icon="res://app-icon.png"
 
 [autoload]
 
